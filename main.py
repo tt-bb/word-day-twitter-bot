@@ -1,8 +1,8 @@
-import tweepy
 import random
+import credentials
+import tweepy
 from PyDictionary import PyDictionary
 from random_words import RandomWords
-import credentials
 
 
 def load_random_word():
@@ -19,11 +19,7 @@ def load_random_word():
         definition = random.choice(definitions[part_of_speech])
     except:
         return "NULL_DEFINITION"
-    return {
-        "word": word,
-        "definition": definition,
-        "part_of_speech": part_of_speech
-    }
+    return {"word": word, "definition": definition, "part_of_speech": part_of_speech}
 
 
 def post_wotd_twitter(word_def):
@@ -40,18 +36,22 @@ def post_wotd_twitter(word_def):
     api = tweepy.API(auth)
 
     # Random GIF
-    gifs = ("images/dictionary.gif",
-            "images/mean.gif",
-            "images/mouth.gif",
-            "images/simpson.gif",
-            "images/words.gif"
-            )
+    gifs = (
+        "images/dictionary.gif",
+        "images/mean.gif",
+        "images/mouth.gif",
+        "images/simpson.gif",
+        "images/words.gif",
+    )
     gif = random.choice(gifs)
 
     # Post a tweet
-    api.update_status_with_media(f'#WOTD {word_def["word"].upper()} : '
-                                 f'({word_def["part_of_speech"]}) '
-                                 f'{word_def["definition"].capitalize()}', gif)
+    api.update_status_with_media(
+        f'#WOTD {word_def["word"].upper()} : '
+        f'({word_def["part_of_speech"]}) '
+        f'{word_def["definition"].capitalize()}',
+        gif,
+    )
 
 
 if __name__ == "__main__":
