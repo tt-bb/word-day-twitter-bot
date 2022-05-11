@@ -1,4 +1,5 @@
 import random
+
 import credentials
 import tweepy
 from PyDictionary import PyDictionary
